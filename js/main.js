@@ -132,7 +132,7 @@ const productos = [
     let metodoPago = prompt(`¿Qué método de pago prefiere?\n${metodosPago.map((m, index) => `${index + 1}. ${m}`).join("\n")}`);
   
     if (metodoPago === "1") {
-      alert("Págale al vendedor, rata. ¡Muchas gracias por su compra!");
+      alert("Págale al vendedor. ¡Muchas gracias por su compra!");
     } else if (metodoPago === "2") {
       alert("Pídale al vendedor el QR. ¡Muchas gracias por su compra!");
     } else if (metodoPago === "3") {
