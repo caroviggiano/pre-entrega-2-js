@@ -121,7 +121,7 @@ const productos = [
     let montoCargaSUBE = cargarSUBE();
     alert("¿Es correcto el monto de carga de SUBE $ " + montoCargaSUBE + " ?");
   }
-  
+
   function pago() {
     const metodosPago = [
       "Efectivo",
@@ -129,17 +129,25 @@ const productos = [
       "Crédito/Débito"
     ];
   
-    let metodoPago = prompt(`¿Qué método de pago prefiere?\n${metodosPago.map((m, index) => `${index + 1}. ${m}`).join("\n")}`);
+    const container = document.getElementById("metodo-pago-container");
   
-    if (metodoPago === "1") {
-      alert("Págale al vendedor. ¡Muchas gracias por su compra!");
-    } else if (metodoPago === "2") {
-      alert("Pídale al vendedor el QR. ¡Muchas gracias por su compra!");
-    } else if (metodoPago === "3") {
-      alert("Pásele la tarjeta al vendedor. ¡Muchas gracias por su compra!");
-    } else {
-      alert("Opción no válida");
-    }
+    metodosPago.forEach((metodo, index) => {
+      const button = document.createElement("button");
+      button.textContent = metodo;
+      button.addEventListener("click", () => {
+        if (index === 0) {
+          alert("Págale al vendedor, rata. ¡Muchas gracias por su compra!");
+        } else if (index === 1) {
+          alert("Pídale al vendedor el QR. ¡Muchas gracias por su compra!");
+        } else if (index === 2) {
+          alert("Pásele la tarjeta al vendedor. ¡Muchas gracias por su compra!");
+        } else {
+          alert("Opción no válida");
+        }
+      });
+  
+      container.appendChild(button);
+    });
   }
   
   pago();

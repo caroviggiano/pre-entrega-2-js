@@ -30,3 +30,12 @@ h3{
     border-radius: 50%;
   
 }
+.stilo-boton{
+    display: flex;
+  justify-content: space-around;
+
+}
+
+.stilo-boton button:hover{
+    background-color: #ff0000;
+  }
