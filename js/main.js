@@ -67,6 +67,8 @@ const productos = [
     let cantidad = Number(prompt("Seleccione la cantidad que desee"));
     let monto = calculoMonto(golosinaSeleccionada, cantidad);
     alert("El monto a pagar es de: $" + monto);
+    alert ("Elija un metodo de pago")
+
   } else if (opcionSeleccionada === 2) {
     function bebidas() {
       const opcionesBebidas = [
@@ -90,6 +92,8 @@ const productos = [
     let cantidad = Number(prompt("Seleccione la cantidad que desee"));
     let monto = calculoMonto(bebidaSeleccionada, cantidad);
     alert("El monto a pagar es de: $" + monto);
+    alert ("Elija un metodo de pago")
+    
   } else if (opcionSeleccionada === 3) {
     function cigarrillos() {
       const opcionesCigarrillos = [
@@ -113,14 +117,19 @@ const productos = [
     let cantidad = Number(prompt("Seleccione la cantidad que desee"));
     let monto = calculoMonto(cigarrilloSeleccionado, cantidad);
     alert("El monto a pagar es de: $" + monto);
+    alert ("Elija un metodo de pago")
+
   } else if (opcionSeleccionada === 4) {
     function cargarSUBE() {
       let sube = Number(prompt("Ingrese el monto que desea cargar a la SUBE:"));
       return sube;
     }
     let montoCargaSUBE = cargarSUBE();
-    alert("¿Es correcto el monto de carga de SUBE $ " + montoCargaSUBE + " ?");
+    alert("El monto a pagar es de: " + montoCargaSUBE );
+    alert ("Elija un metodo de pago")
   }
+
+  
 
   function pago() {
     const metodosPago = [
@@ -136,7 +145,7 @@ const productos = [
       button.textContent = metodo;
       button.addEventListener("click", () => {
         if (index === 0) {
-          alert("Págale al vendedor, rata. ¡Muchas gracias por su compra!");
+          alert("Págale al vendedor. ¡Muchas gracias por su compra!");
         } else if (index === 1) {
           alert("Pídale al vendedor el QR. ¡Muchas gracias por su compra!");
         } else if (index === 2) {
