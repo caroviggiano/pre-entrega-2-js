@@ -88,7 +88,7 @@
     alert("El monto a pagar es de: $" + montoCargaSUBE);
   }
   
-  // Función para mostrar los métodos de pago
+  
   function mostrarMetodosPago() {
     const metodosPago = ["Efectivo", "Mercado Pago", "Crédito/Débito"];
   
