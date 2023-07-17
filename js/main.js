@@ -1,17 +1,23 @@
-
-const productos = [
-    { nombre: "Alfajores", precio: 250 },
-    { nombre: "Caramelos", precio: 10 },
-    { nombre: "Gomitas", precio: 100 },
-    { nombre: "Chocolates", precio: 150 },
-    { nombre: "Bebidas energéticas", precio: 400 },
-    { nombre: "Agua", precio: 120 },
-    { nombre: "Gaseosas", precio: 280 },
-    { nombre: "Jugos", precio: 170 },
-    { nombre: "Marlboro", precio: 500 },
-    { nombre: "Camel", precio: 600 },
-    { nombre: "Chesterfield", precio: 300 },
-    { nombre: "Lucky Strike", precio: 450 }
+ class Producto {
+    constructor(nombre, precio) {
+      this.nombre = nombre;
+      this.precio = precio;
+    }
+  }
+  
+  const productos = [
+    new Producto("Alfajores", 250),
+    new Producto("Caramelos", 10),
+    new Producto("Gomitas", 100),
+    new Producto("Chocolates", 150),
+    new Producto("Bebidas energéticas", 400),
+    new Producto("Agua", 120),
+    new Producto("Gaseosas", 280),
+    new Producto("Jugos", 170),
+    new Producto("Marlboro", 500),
+    new Producto("Camel", 600),
+    new Producto("Chesterfield", 300),
+    new Producto("Lucky Strike", 450)
   ];
   
   function calculoMonto(productoIndex, cantidad) {
@@ -24,119 +30,67 @@ const productos = [
     }
   }
   
-  function ingresarOpcion() {
-    const opciones = [
-      "Comprar golosinas",
-      "Comprar bebidas",
-      "Comprar cigarrillos",
-      "Cargar SUBE"
-    ];
+  function mostrarOpciones(opciones) {
+    return Number(prompt(`Bienvenido a Kioskito De Maní! Presione lo que necesite para continuar\n${opciones.map((o, index) => `${index + 1}. ${o}`).join("\n")}`));
+  }
   
-    let opcion = Number(prompt(`Bienvenido a Kioskito De Maní! Presione lo que necesite para continuar\n${opciones.map((o, index) => `${index + 1}. ${o}`).join("\n")}`));
+  function mostrarProductos(tipoProductos) {
+    const opcionesProductos = tipoProductos.map((producto) => producto.nombre);
+    let productoSeleccionado = mostrarOpciones(opcionesProductos);
   
-    if (opcion > opciones.length || opcion < 1) {
+    if (productoSeleccionado < 1 || productoSeleccionado > opcionesProductos.length) {
       alert("El número que seleccionó no está dentro de las opciones. Por favor, inténtelo nuevamente.");
       return null;
     } else {
-      return opcion;
+      return productoSeleccionado - 1;
     }
   }
   
-  let opcionSeleccionada = ingresarOpcion();
+  let opcionSeleccionada = mostrarOpciones([
+    "Comprar golosinas",
+    "Comprar bebidas",
+    "Comprar cigarrillos",
+    "Cargar SUBE"
+  ]);
   
   if (opcionSeleccionada === 1) {
-    function golosinas() {
-      const opcionesGolosinas = [
-        "Alfajores",
-        "Caramelos",
-        "Gomitas",
-        "Chocolates"
-      ];
+    const tipoGolosinas = productos.slice(0, 4);
+    let golosinaSeleccionada = mostrarProductos(tipoGolosinas);
   
-      let golosina = Number(prompt(`¿Qué golosina está buscando?\n${opcionesGolosinas.map((g, index) => `${index + 1}. ${g}`).join("\n")}`));
-  
-      if (golosina < 1 || golosina > opcionesGolosinas.length) {
-        alert("El número que seleccionó no está dentro de las opciones. Por favor, inténtelo nuevamente.");
-      } else {
-        return golosina - 1;
-      }
+    if (golosinaSeleccionada !== null) {
+      let cantidad = Number(prompt("Seleccione la cantidad que desee"));
+      let monto = calculoMonto(golosinaSeleccionada, cantidad);
+      alert("El monto a pagar es de: $" + monto);
     }
   
-    let golosinaSeleccionada = golosinas();
-  
-    let cantidad = Number(prompt("Seleccione la cantidad que desee"));
-    let monto = calculoMonto(golosinaSeleccionada, cantidad);
-    alert("El monto a pagar es de: $" + monto);
-    alert ("Elija un metodo de pago")
-
   } else if (opcionSeleccionada === 2) {
-    function bebidas() {
-      const opcionesBebidas = [
-        "Bebidas energéticas",
-        "Agua",
-        "Gaseosas",
-        "Jugos"
-      ];
+    const tipoBebidas = productos.slice(4, 8);
+    let bebidaSeleccionada = mostrarProductos(tipoBebidas);
   
-      let bebida = Number(prompt(`¿Qué bebida está buscando?\n${opcionesBebidas.map((b, index) => `${index + 1}. ${b}`).join("\n")}`));
-  
-      if (bebida < 1 || bebida > opcionesBebidas.length) {
-        alert("El número que seleccionó no está dentro de las opciones. Por favor, inténtelo nuevamente.");
-      } else {
-        return bebida + 4;
-      }
+    if (bebidaSeleccionada !== null) {
+      let cantidad = Number(prompt("Seleccione la cantidad que desee"));
+      let monto = calculoMonto(bebidaSeleccionada + 4, cantidad);
+      alert("El monto a pagar es de: $" + monto);
     }
   
-    let bebidaSeleccionada = bebidas();
-  
-    let cantidad = Number(prompt("Seleccione la cantidad que desee"));
-    let monto = calculoMonto(bebidaSeleccionada, cantidad);
-    alert("El monto a pagar es de: $" + monto);
-    alert ("Elija un metodo de pago")
-    
   } else if (opcionSeleccionada === 3) {
-    function cigarrillos() {
-      const opcionesCigarrillos = [
-        "Marlboro",
-        "Chesterfield",
-        "Camel",
-        "Lucky Strike"
-      ];
+    const tipoCigarrillos = productos.slice(8);
+    let cigarrilloSeleccionado = mostrarProductos(tipoCigarrillos);
   
-      let cigarrillo = Number(prompt(`¿Qué marca de cigarrillo está buscando?\n${opcionesCigarrillos.map((c, index) => `${index + 1}. ${c}`).join("\n")}`));
-  
-      if (cigarrillo < 1 || cigarrillo > opcionesCigarrillos.length) {
-        alert("El número que seleccionó no está dentro de las opciones. Por favor, inténtelo nuevamente.");
-      } else {
-        return cigarrillo + 8;
-      }
+    if (cigarrilloSeleccionado !== null) {
+      let cantidad = Number(prompt("Seleccione la cantidad que desee"));
+      let monto = calculoMonto(cigarrilloSeleccionado + 8, cantidad);
+      alert("El monto a pagar es de: $" + monto);
     }
   
-    let cigarrilloSeleccionado = cigarrillos();
-  
-    let cantidad = Number(prompt("Seleccione la cantidad que desee"));
-    let monto = calculoMonto(cigarrilloSeleccionado, cantidad);
-    alert("El monto a pagar es de: $" + monto);
-    alert ("Elija un metodo de pago")
-
   } else if (opcionSeleccionada === 4) {
-    function cargarSUBE() {
-      let sube = Number(prompt("Ingrese el monto que desea cargar a la SUBE:"));
-      return sube;
-    }
-    let montoCargaSUBE = cargarSUBE();
-    alert("El monto a pagar es de: " + montoCargaSUBE );
-    alert ("Elija un metodo de pago")
+    let montoCargaSUBE = Number(prompt("Ingrese el monto que desea cargar a la SUBE:"));
+    alert("El monto a pagar es de: $" + montoCargaSUBE);
   }
-
   
-
-  function pago() {
-    const metodosPago = [
-      "Efectivo",
-      "Mercado Pago",
-      "Crédito/Débito"
-    ];
+  // Función para mostrar los métodos de pago
+  function mostrarMetodosPago() {
+    const metodosPago = ["Efectivo", "Mercado Pago", "Crédito/Débito"];
   
     const container = document.getElementById("metodo-pago-container");
   
@@ -159,5 +113,5 @@ const productos = [
     });
   }
   
-  pago();
+  mostrarMetodosPago();
   
